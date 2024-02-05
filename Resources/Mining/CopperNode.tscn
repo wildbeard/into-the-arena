@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://co5uboes7l0k8"]
+
+[ext_resource type="PackedScene" uid="uid://857lpooslfi1" path="res://Resources/ResosurceNode.tscn" id="1_gbo0n"]
+[ext_resource type="Texture2D" uid="uid://crf3lc8vqnivr" path="res://Resources/Mining/Copper.png" id="2_r7rcg"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_l48bl"]
+radius = 9.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_62uk5"]
+radius = 22.8035
+
+[node name="Copper" instance=ExtResource("1_gbo0n")]
+sprites = {
+"available": "res://Resources/Mining/Copper.png",
+"unavailable": "res://Resources/Mining/OreEmpty.png"
+}
+startsAvailable = true
+
+[node name="Sprite" parent="." index="0"]
+texture = ExtResource("2_r7rcg")
+
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2(0, 4)
+rotation = -1.57079
+shape = SubResource("CapsuleShape2D_l48bl")
+
+[node name="CollisionShape2D" parent="GatherArea" index="0"]
+position = Vector2(0, 4)
+shape = SubResource("CircleShape2D_62uk5")

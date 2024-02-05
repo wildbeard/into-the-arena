@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bc5ijtp4qymtr"]
+[gd_scene load_steps=16 format=3 uid="uid://bc5ijtp4qymtr"]
 
 [ext_resource type="Texture2D" uid="uid://ghrkxpo6xvcr" path="res://World/DirtTileset.png" id="2_5eteg"]
 [ext_resource type="Texture2D" uid="uid://gx1cl8sdr2by" path="res://World/CliffTileset.png" id="2_8s5mt"]
@@ -7,7 +7,9 @@
 [ext_resource type="Texture2D" uid="uid://drtna5k3aag0u" path="res://World/GrassBackground.png" id="3_2ok4v"]
 [ext_resource type="PackedScene" uid="uid://0wb6ylskar1v" path="res://World/Grass.tscn" id="6_bndro"]
 [ext_resource type="PackedScene" uid="uid://cah3a6fsru5bd" path="res://Enemies/Bat.tscn" id="7_umdfg"]
-[ext_resource type="PackedScene" uid="uid://bgdh7xfvpg10y" path="res://World/CopperOre.tscn" id="8_4yd37"]
+[ext_resource type="PackedScene" uid="uid://co5uboes7l0k8" path="res://Resources/Mining/CopperNode.tscn" id="8_3bxtq"]
+[ext_resource type="PackedScene" uid="uid://c21lcw10xktkf" path="res://Resources/Mining/IronNode.tscn" id="9_cwbbj"]
+[ext_resource type="PackedScene" uid="uid://c8t62h4bjiqqe" path="res://Resources/Trees/TreeNode.tscn" id="10_mw25i"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_6j76n"]
 
@@ -894,5 +896,12 @@ position = Vector2(29, -16)
 [node name="Bat" parent="." instance=ExtResource("7_umdfg")]
 position = Vector2(145, 98)
 
-[node name="Copper" parent="." instance=ExtResource("8_4yd37")]
-position = Vector2(209, 100)
+[node name="Copper" parent="." instance=ExtResource("8_3bxtq")]
+position = Vector2(157, 115)
+
+[node name="Iron" parent="." instance=ExtResource("9_cwbbj")]
+position = Vector2(198, 115)
+
+[node name="Tree" parent="." instance=ExtResource("10_mw25i")]
+position = Vector2(236, 111)
+startsAvailable = true

@@ -1,0 +1,23 @@
+[gd_scene load_steps=2 format=3 uid="uid://857lpooslfi1"]
+
+[ext_resource type="Script" path="res://Resources/ResosurceNode.gd" id="1_b5bkh"]
+
+[node name="ResosurceNode" type="StaticBody2D"]
+script = ExtResource("1_b5bkh")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[node name="GatherArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GatherArea"]
+
+[node name="RespawnTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="body_entered" from="GatherArea" to="." method="_on_gather_area_body_entered"]
+[connection signal="body_exited" from="GatherArea" to="." method="_on_gather_area_body_exited"]
+[connection signal="timeout" from="RespawnTimer" to="." method="_on_respawn_timer_timeout"]
