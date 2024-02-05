@@ -16,9 +16,10 @@ var knockback = Vector2.ZERO
 var currentState = EnemyState.IDLE
 
 func _physics_process(delta):
-	knockback = knockback.move_toward(Vector2.ZERO, 225 * delta)
-	velocity = knockback
-	move_and_slide()
+	if knockback > Vector2.ZERO:
+		knockback = knockback.move_toward(Vector2.ZERO, 225 * delta)
+		velocity = knockback
+		move_and_slide()
 	
 	match currentState:
 		EnemyState.IDLE:
@@ -30,6 +31,8 @@ func _physics_process(delta):
 			if player:
 				var playerDir = position.direction_to(player.global_position).normalized()
 				velocity = velocity.move_toward(playerDir * maxSpeed, acceleration * delta)
+			else:
+				currentState = EnemyState.IDLE
 
 		EnemyState.WANDER:
 			pass
