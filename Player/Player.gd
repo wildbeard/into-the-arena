@@ -26,6 +26,8 @@ var isAttacking: bool = false
 var stats = PlayerStats
 
 func _ready():
+	self.stats.max_health = 4
+	print('Max: ', self.stats.max_health, ' Curr: ', self.stats.health)
 	self.stats.connect('no_health', queue_free)
 	animationTree.active = true
 
@@ -84,6 +86,8 @@ func roll_state(delta):
 	velocity = velocity.move_toward(rollVector * MAX_SPEED * 1.5, ACCELERATION * delta)
 	animationState.travel("Roll")
 	move()
+	# Simple i-frame
+	hurtbox.startInvincibility(0.25)
 
 func attack_state(delta):
 	animationState.travel("Attack")

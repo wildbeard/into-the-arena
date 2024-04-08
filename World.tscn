@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bc5ijtp4qymtr"]
+[gd_scene load_steps=17 format=3 uid="uid://bc5ijtp4qymtr"]
 
 [ext_resource type="Texture2D" uid="uid://ghrkxpo6xvcr" path="res://World/DirtTileset.png" id="2_5eteg"]
 [ext_resource type="Texture2D" uid="uid://gx1cl8sdr2by" path="res://World/CliffTileset.png" id="2_8s5mt"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://co5uboes7l0k8" path="res://Resources/Mining/CopperNode.tscn" id="8_3bxtq"]
 [ext_resource type="PackedScene" uid="uid://c21lcw10xktkf" path="res://Resources/Mining/IronNode.tscn" id="9_cwbbj"]
 [ext_resource type="PackedScene" uid="uid://c8t62h4bjiqqe" path="res://Resources/Trees/TreeNode.tscn" id="10_mw25i"]
+[ext_resource type="PackedScene" uid="uid://bqjfmadi7boe1" path="res://UI/HealthUI.tscn" id="11_an702"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_6j76n"]
 
@@ -905,3 +906,6 @@ position = Vector2(198, 115)
 [node name="Tree" parent="." instance=ExtResource("10_mw25i")]
 position = Vector2(236, 111)
 startsAvailable = true
+
+[node name="HealthUI" parent="." node_paths=PackedStringArray("player") instance=ExtResource("11_an702")]
+player = NodePath("../Player")
