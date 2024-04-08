@@ -11,6 +11,7 @@ const KNOCKBACK_FORCE = 100
 @export var maxSpeed = 50
 @onready var healthStats = $HealthStats
 @onready var playerDetection = $PlayerDetection
+@onready var hurtbox = $Hurtbox
 
 var knockback = Vector2.ZERO
 var currentState = EnemyState.IDLE
@@ -47,6 +48,7 @@ func seekPlayer():
 func _on_hurtbox_area_entered(area):
 	knockback = get_knockback_direction(area.owner.position) * KNOCKBACK_FORCE
 	healthStats.health = healthStats.health - area.damage
+	hurtbox.createHitEffect()
 
 func get_knockback_direction(areaPosition):
 	return (position - areaPosition).normalized()

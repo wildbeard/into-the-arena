@@ -2,11 +2,15 @@
 
 [ext_resource type="Script" path="res://Hitboxes/Hurtbox.gd" id="1_033lo"]
 
-[node name="Area2D" type="Area2D"]
+[node name="Hurtbox" type="Area2D"]
 collision_layer = 0
 collision_mask = 0
 script = ExtResource("1_033lo")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 
-[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[node name="InvincibilityTimer" type="Timer" parent="."]
+
+[connection signal="invincibility_end" from="." to="." method="_on_invincibility_end"]
+[connection signal="invincibility_start" from="." to="." method="_on_invincibility_start"]
+[connection signal="timeout" from="InvincibilityTimer" to="." method="_on_InvincibilityTimer_timeout"]

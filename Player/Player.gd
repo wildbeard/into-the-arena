@@ -5,29 +5,46 @@ const FRICTION = 10000
 const MAX_SPEED = 95
 const SPRINT_MODIFIER = 0.15
 
-enum PlayerState {
-	ATTACK,
+enum MoveState {
 	MOVE,
 	ROLL,
+}
+
+enum AttackState {
+	NONE,
+	ATTACK,
 }
 
 @onready var animationPlayer = $AnimationPlayer
 @onready var animationTree = $AnimationTree
 @onready var animationState = animationTree.get("parameters/playback")
-var state = PlayerState.MOVE
+@onready var hurtbox = $Hurtbox
+var moveState = MoveState.MOVE
+var attackState = AttackState.NONE
 var rollVector = Vector2.DOWN
+var isAttacking: bool = false
+var stats = PlayerStats
 
 func _ready():
+	self.stats.connect('no_health', queue_free)
 	animationTree.active = true
 
 func _physics_process(delta):
-	match state:
-		PlayerState.MOVE:
+	# Two state machines allows the user to move + attack
+	# but doesn't allow the user to attack + roll or change
+	# direction and roll.
+	match moveState:
+		MoveState.MOVE:
 			move_state(delta)
-		PlayerState.ATTACK:
-			attack_state(delta)
-		PlayerState.ROLL:
+		MoveState.ROLL:
 			roll_state(delta)
+	
+	if isAttacking:
+		attack_state(delta)
+		
+	if Input.is_action_just_pressed("Attack"):
+		isAttacking = true
+		attackState = AttackState.ATTACK
 	
 func move_state(delta):
 	var input = Vector2()
@@ -51,10 +68,11 @@ func move_state(delta):
 	move()
 	
 	if Input.is_action_just_pressed("Roll"):
-		state = PlayerState.ROLL
+		moveState = MoveState.ROLL
 
 	if Input.is_action_just_pressed("Attack"):
-		state = PlayerState.ATTACK
+		# attackState = AttackState.ATTACK
+		pass
 
 func set_blend_positions(input):
 	animationTree.set("parameters/Idle/blend_position", input)
@@ -69,12 +87,23 @@ func roll_state(delta):
 
 func attack_state(delta):
 	animationState.travel("Attack")
+	await animationPlayer.get_current_animation_length()
 	
 func move():
 	move_and_slide()
-	
+
+func attack_animation_started():
+	pass
+
 func attack_animation_complete():
-	state = PlayerState.MOVE
+	isAttacking = false
+	attackState = AttackState.NONE
+	print("animation complete")
 	
 func roll_animation_complete():
-	state = PlayerState.MOVE
+	moveState = MoveState.MOVE
+
+func _on_hurtbox_area_entered(area):
+	hurtbox.startInvincibility(0.5)
+	hurtbox.createHitEffect()
+	self.stats.health -= 1

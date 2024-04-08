@@ -1,9 +1,10 @@
-[gd_scene load_steps=54 format=3 uid="uid://8uh15tcfcvjh"]
+[gd_scene load_steps=56 format=3 uid="uid://8uh15tcfcvjh"]
 
 [ext_resource type="Script" path="res://Player/Player.gd" id="1_lljkj"]
 [ext_resource type="Texture2D" uid="uid://civf3vnrqxkjs" path="res://Player/Player.png" id="2_5mc0e"]
 [ext_resource type="PackedScene" uid="uid://ba1avr63xmsim" path="res://Hitboxes/Hitbox.tscn" id="3_v0jew"]
 [ext_resource type="Script" path="res://Player/SwordHitbox.gd" id="4_7a5hg"]
+[ext_resource type="PackedScene" uid="uid://bvf2e7n0g2dqx" path="res://Hitboxes/Hurtbox.tscn" id="5_gd6mo"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gskuq"]
 radius = 3.0
@@ -139,9 +140,12 @@ tracks/1/path = NodePath(".")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.4),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
 "values": [{
+"args": [],
+"method": &"attack_animation_started"
+}, {
 "args": [],
 "method": &"attack_animation_complete"
 }]
@@ -674,6 +678,10 @@ graph_offset = Vector2(-53.046, -84.1803)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_se3w6"]
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_o6itg"]
+radius = 5.0
+height = 18.0
+
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
 script = ExtResource("1_lljkj")
@@ -720,4 +728,14 @@ script = ExtResource("4_7a5hg")
 shape = SubResource("CapsuleShape2D_se3w6")
 disabled = true
 
+[node name="Hurtbox" parent="." instance=ExtResource("5_gd6mo")]
+collision_mask = 4
+
+[node name="CollisionShape2D" parent="Hurtbox" index="0"]
+position = Vector2(0, -7)
+shape = SubResource("CapsuleShape2D_o6itg")
+
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
+
 [editable path="HitboxPivot/SwordHitbox"]
+[editable path="Hurtbox"]
