@@ -850,10 +850,11 @@ y_sort_enabled = true
 [node name="BG" type="Sprite2D" parent="."]
 texture_filter = 1
 texture_repeat = 2
+position = Vector2(-171, -103)
 texture = ExtResource("3_2ok4v")
 centered = false
 region_enabled = true
-region_rect = Rect2(0, 0, 320, 180)
+region_rect = Rect2(0, -200, 680, 380)
 
 [node name="CliffsTileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_igi14")
@@ -866,8 +867,16 @@ tile_set = SubResource("TileSet_8vop5")
 format = 2
 layer_0/tile_data = PackedInt32Array(327692, 65537, 2, 327691, 589825, 1, 327690, 65537, 0, 327689, 1, 0, 327693, 131073, 2, 262158, 65537, 2, 262159, 131073, 2, 131087, 1, 0, 196623, 589825, 1, 196622, 65537, 0, 655364, 1, 2, 589829, 131073, 1, 524293, 131073, 1, 524292, 1, 1, 589828, 1, 1, 655365, 131073, 2, 458756, 393217, 1, 393219, 655361, 3, 458755, 1, 2, 393220, 65537, 0, 393218, 1, 2, 327682, 589825, 0, 327683, 131073, 0, 262146, 458753, 0, 262145, 65537, 0, 327681, 65537, 2, 327680, 1, 2, 262144, 1, 0, 458757, 327681, 1, 393221, 65537, 0, 393222, 65537, 0, 393224, 65537, 0, 393223, 65537, 0, 393225, 589825, 1, 458761, 131073, 2, 458760, 65537, 2, 458759, 65537, 2, 458758, 65537, 2, 393226, 65537, 2, 262157, 589825, 1, 262156, 65537, 0, 262155, 1, 0, 196621, 1, 0, 393227, 131073, 2, 196624, 65537, 2, 131088, 393217, 2, 131089, 131073, 1, 65553, 589825, 1, 18, 65537, 0, 65554, 65537, 2, 17, 1, 0, 65552, 1, 0, 19, 131073, 0, 65555, 131073, 2, 196625, 131073, 2)
 
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(122, 57)
+
 [node name="Player" parent="." instance=ExtResource("2_il408")]
 position = Vector2(122, 57)
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
+remote_path = NodePath("../../Camera2D")
+update_rotation = false
+update_scale = false
 
 [node name="Grass" type="Node2D" parent="."]
 y_sort_enabled = true
@@ -907,5 +916,10 @@ position = Vector2(198, 115)
 position = Vector2(236, 111)
 startsAvailable = true
 
-[node name="HealthUI" parent="." node_paths=PackedStringArray("player") instance=ExtResource("11_an702")]
-player = NodePath("../Player")
+[node name="Bat2" parent="." instance=ExtResource("7_umdfg")]
+position = Vector2(128, 98)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HealthUI" parent="CanvasLayer" node_paths=PackedStringArray("player") instance=ExtResource("11_an702")]
+player = NodePath("../../Player")

@@ -12,6 +12,7 @@ const KNOCKBACK_FORCE = 100
 @onready var healthStats = $HealthStats
 @onready var playerDetection = $PlayerDetection
 @onready var hurtbox = $Hurtbox
+@onready var softCollider = $SoftCollision
 
 var knockback = Vector2.ZERO
 var currentState = EnemyState.IDLE
@@ -39,6 +40,11 @@ func _physics_process(delta):
 			pass
 
 	$AnimatedSprite2D.flip_h = velocity.x < 0
+	
+	if softCollider.isColliding():
+		# 1200 feels way too high
+		velocity += softCollider.getPushVector() * delta * 1200
+	
 	move_and_slide()
 
 func seekPlayer():

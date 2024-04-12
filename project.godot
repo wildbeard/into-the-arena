@@ -53,7 +53,9 @@ Gather={
 2d_physics/layer_3="PlayerHurtbox"
 2d_physics/layer_4="EnemtyHurtbox"
 2d_physics/layer_5="Enemy"
+2d_physics/layer_6="SoftCollisions"
 
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
+2d/snap/snap_2d_transforms_to_pixel=true

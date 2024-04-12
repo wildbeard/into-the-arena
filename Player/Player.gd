@@ -27,7 +27,6 @@ var stats = PlayerStats
 
 func _ready():
 	self.stats.max_health = 4
-	print('Max: ', self.stats.max_health, ' Curr: ', self.stats.health)
 	self.stats.connect('no_health', queue_free)
 	animationTree.active = true
 
