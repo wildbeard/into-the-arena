@@ -4,23 +4,28 @@
 [ext_resource type="Texture2D" uid="uid://ob24lfyl78jb" path="res://Projectiles/arrow.png" id="2_nlten"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lgk2f"]
-radius = 2.0
-height = 22.0
+radius = 3.0
+height = 16.0
 
 [node name="Arrow" type="Area2D" node_paths=PackedStringArray("offScreen")]
-collision_layer = 64
-collision_mask = 0
+collision_layer = 65
 script = ExtResource("1_b528n")
+speed = 225
 offScreen = NodePath("VisibleOnScreenEnabler2D")
+maxRange = 100
+sticksToWalls = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.65, 0.65)
 texture = ExtResource("2_nlten")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(2, -1)
+position = Vector2(1, -1)
 rotation = -1.5708
 shape = SubResource("CapsuleShape2D_lgk2f")
 
 [node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+position = Vector2(-5, -1)
+scale = Vector2(0.25, 0.3)
 
-[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_shape_entered" from="." to="." method="_on_body_shape_entered"]
