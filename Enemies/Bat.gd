@@ -27,9 +27,10 @@ func _ready():
 	updateWander()
 
 func _physics_process(delta):
-	if knockback > Vector2.ZERO:
+	if knockback != Vector2.ZERO:
 		knockback = knockback.move_toward(Vector2.ZERO, 225 * delta)
 		velocity = knockback
+		knockback = Vector2.ZERO
 		move_and_slide()
 	
 	match currentState:
@@ -86,6 +87,7 @@ func getNewState(states: Array):
 func _on_hurtbox_area_entered(area: Area2D):
 	var pos = area.owner.position if area.owner else area.position
 	knockback = get_knockback_direction(pos) * KNOCKBACK_FORCE
+	print(knockback)
 	healthStats.health = healthStats.health - area.damage
 	hurtbox.createHitEffect()
 	
@@ -93,7 +95,7 @@ func _on_hurtbox_area_entered(area: Area2D):
 	if !area.owner && area.has_method("destroy"):
 		area.destroy()
 
-func get_knockback_direction(areaPosition):
+func get_knockback_direction(areaPosition: Vector2):
 	return (position - areaPosition).normalized()
 	
 func play_death_effect():
