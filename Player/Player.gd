@@ -25,6 +25,8 @@ var attackState = AttackState.NONE
 var rollVector = Vector2.DOWN
 var isAttacking: bool = false
 var stats = PlayerStats
+var arrowScene = preload("res://Projectiles/Arrow.tscn")
+var fireballScene = preload("res://Projectiles/Fireball.tscn")
 
 func _ready():
 	self.stats.max_health = 4
@@ -47,6 +49,14 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("Attack"):
 		isAttacking = true
 		attackState = AttackState.ATTACK
+
+	if Input.is_action_just_pressed("left_click"):
+		var fireball = fireballScene.instantiate()
+		var mousePos = get_global_mouse_position()
+		$Marker2D.look_at(mousePos)
+		fireball.global_position = $Marker2D.global_position
+		fireball.rotation = $Marker2D.rotation
+		add_child(fireball)
 	
 func move_state(delta):
 	var input = Vector2()

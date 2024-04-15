@@ -83,10 +83,15 @@ func getNewState(states: Array):
 	states.shuffle()
 	return states.pick_random()
 
-func _on_hurtbox_area_entered(area):
-	knockback = get_knockback_direction(area.owner.position) * KNOCKBACK_FORCE
+func _on_hurtbox_area_entered(area: Area2D):
+	var pos = area.owner.position if area.owner else area.position
+	knockback = get_knockback_direction(pos) * KNOCKBACK_FORCE
 	healthStats.health = healthStats.health - area.damage
 	hurtbox.createHitEffect()
+	
+	# Assuming that without an owner this is a projectile
+	if !area.owner && area.has_method("destroy"):
+		area.destroy()
 
 func get_knockback_direction(areaPosition):
 	return (position - areaPosition).normalized()
