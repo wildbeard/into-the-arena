@@ -3,7 +3,7 @@ extends Area2D
 const HitEffect = preload("res://Effects/HitEffect.tscn")
 
 @export var showHitEffect = true
-@onready var timer = $InvincibilityTimer
+@onready var timer: Timer = $InvincibilityTimer
 
 var invincible = false
 
@@ -29,10 +29,8 @@ func _on_InvincibilityTimer_timeout():
 	invincible = false
 	emit_signal("invincibility_end")
 
-
 func _on_invincibility_start():
 	set_deferred("monitoring", false)
-
 
 func _on_invincibility_end():
 	monitoring = true

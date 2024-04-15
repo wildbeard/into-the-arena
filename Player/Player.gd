@@ -4,6 +4,7 @@ const ACCELERATION = 625 # 375
 const FRICTION = 10000
 const MAX_SPEED = 95
 const SPRINT_MODIFIER = 0.15
+const INVINCIBILITY_TIMER = 0.5
 
 enum MoveState {
 	MOVE,
@@ -107,6 +108,6 @@ func roll_animation_complete():
 	moveState = MoveState.MOVE
 
 func _on_hurtbox_area_entered(area):
-	hurtbox.startInvincibility(0.5)
+	hurtbox.startInvincibility(INVINCIBILITY_TIMER)
 	hurtbox.createHitEffect()
 	self.stats.health -= 1

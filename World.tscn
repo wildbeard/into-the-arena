@@ -905,6 +905,11 @@ position = Vector2(29, -16)
 
 [node name="Bat" parent="." instance=ExtResource("7_umdfg")]
 position = Vector2(145, 98)
+wanderRange = 12
+
+[node name="Bat2" parent="." instance=ExtResource("7_umdfg")]
+position = Vector2(128, 98)
+wanderRange = 12
 
 [node name="Copper" parent="." instance=ExtResource("8_3bxtq")]
 position = Vector2(157, 115)
@@ -915,9 +920,6 @@ position = Vector2(198, 115)
 [node name="Tree" parent="." instance=ExtResource("10_mw25i")]
 position = Vector2(236, 111)
 startsAvailable = true
-
-[node name="Bat2" parent="." instance=ExtResource("7_umdfg")]
-position = Vector2(128, 98)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
