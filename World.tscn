@@ -904,11 +904,11 @@ position = Vector2(22, 22)
 position = Vector2(29, -16)
 
 [node name="Bat" parent="." instance=ExtResource("7_umdfg")]
-position = Vector2(145, 98)
+position = Vector2(242, 69)
 wanderRange = 12
 
 [node name="Bat2" parent="." instance=ExtResource("7_umdfg")]
-position = Vector2(128, 98)
+position = Vector2(61, 116)
 wanderRange = 12
 
 [node name="Copper" parent="." instance=ExtResource("8_3bxtq")]

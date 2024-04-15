@@ -55,7 +55,6 @@ func _physics_process(delta):
 			seekPlayer()
 			var pos = wanderCtrl.getTargetPosition()
 			_accelerateToPosition(pos, delta)
-			draw_circle(pos, 10, Color.WHITE)
 
 			if global_position.distance_to(pos) <= maxSpeed * delta || wanderCtrl.getTimeRemaining() == 0:
 				updateWander()
