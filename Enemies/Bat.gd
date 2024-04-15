@@ -87,7 +87,6 @@ func getNewState(states: Array):
 func _on_hurtbox_area_entered(area: Area2D):
 	var pos = area.owner.position if area.owner else area.position
 	knockback = get_knockback_direction(pos) * KNOCKBACK_FORCE
-	print(knockback)
 	healthStats.health = healthStats.health - area.damage
 	hurtbox.createHitEffect()
 	

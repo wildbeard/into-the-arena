@@ -856,7 +856,7 @@ centered = false
 region_enabled = true
 region_rect = Rect2(0, -200, 680, 380)
 
-[node name="CliffsTileMap" type="TileMap" parent="."]
+[node name="CliffsTileMap" type="TileMap" parent="." groups=["walls"]]
 tile_set = SubResource("TileSet_igi14")
 rendering_quadrant_size = 32
 format = 2
